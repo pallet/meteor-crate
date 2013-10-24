@@ -12,7 +12,7 @@
    [pallet.crate :refer [assoc-settings defmethod-plan defplan get-settings]]
    [pallet.crate-install :as crate-install]
    [pallet.script.lib :refer [rm]]
-   [pallet.utils :refer [apply-map deep-merge]]
+   [pallet.utils :refer [apply-map deep-merge maybe-assoc]]
    [pallet.version-dispatch
     :refer [defmethod-version-plan defmulti-version-plan]]
    [pallet.versions :refer [version-string as-version-vector]]))
@@ -101,16 +101,17 @@
 
 (defn server-environment
   "Return a map of environment vars to use when running a meteor bundle."
-  [bundle-root root-url port mongo-url & {:keys [exec-with instance-id]
-                                          :or {exec-with "node"}}]
-  {:PORT port :MONGO_URL mongo-url :ROOT_URL root-url})
-
-;; (defn server-command
-;;   "Return a command to start a meteor server for a bundle."
-;;   [bundle-root root-url port mongo-url & {:keys [exec-with instance-id]
-;;                                           :or {exec-with "node"}}]
-;;   (format "PORT=%s MONGO_URL=%s ROOT_URL=%s %s %s/bundle/main.js"
-;;           port mongo-url root-url exec-with bundle-root))
+  [bundle-root {:keys [root-url port mongo-url
+                       mail-url meteor-settings
+                       exec-with instance-id]
+                :or {port 8080
+                     mongo-url "mongodb://localhost:27017/app"
+                     exec-with "node"}}]
+  (-> {:PORT port
+       :MONGO_URL mongo-url
+       :ROOT_URL (or root-url (str "http://localhost:" port))}
+      (maybe-assoc :MAIL_URL mail-url)
+      (maybe-assoc :METEOR_SETTINGS meteor-settings)))
 
 ;;; # Server spec
 (defn server-spec
