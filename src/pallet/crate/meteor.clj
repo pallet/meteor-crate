@@ -84,20 +84,20 @@
   "Rebuild fibers in a bundle."
   [bundle-path]
   (with-action-options
-    {:script-dir (str (file bundle-path "programs" "server" "node_modules"))}
+    {:script-dir (str (file bundle-path "server" "node_modules"))}
     (exec-checked-script
-     "Rebuil fibers"
-     (rm fibers :recursive true)
-     ("npm" install "fibers@1.0.1"))))
+     "Rebuild fibers"
+     (rm fibers :recursive true :force true)
+     ("npm" "--color" false install "fibers@1.0.1"))))
 
 (defplan deploy-bundle
   "Deploy a bundle for meteor.
 
 `bundle-file-spec` is a map of remote-directory arguments, specifying
   the bundle tgz."
-  [target-path bundle-file-spec {:keys [instance-id]}]
+  [target-path bundle-file-spec]
   (apply-map remote-directory target-path bundle-file-spec)
-  (rebuild-fibers))
+  (rebuild-fibers target-path))
 
 (defn server-environment
   "Return a map of environment vars to use when running a meteor bundle."
@@ -122,7 +122,6 @@
                         (pallet.crate.meteor/settings settings))
             :install (plan-fn
                        (install {:instance-id instance-id}))
-            :deploy-bundle (fn [target-path bundle-file-spec
-                                & {:keys [instance-id] :as options}]
+            :deploy-bundle (fn [target-path bundle-file-spec]
                              (apply-map deploy-bundle target-path
-                                        bundle-file-spec options))}))
+                                        bundle-file-spec))}))
