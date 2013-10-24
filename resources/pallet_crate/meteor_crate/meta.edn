@@ -1,0 +1,11 @@
+{:header "meteor"
+ :title
+ "A [pallet](http://palletops.com/) crate to install and configure
+ [meteor](http://meteor.com)."
+ :git-repo "https://github.com/pallet/meteor-crate"
+ :api-docs "http://palletops.com/meteor-crate/0.8/api"
+ :annotated-docs "http://palletops.com/meteor-crate/0.8/annotated/uberdoc.html"
+ :tag-prefix ""
+ :artifact-id "meteor-crate"
+ :source-path "src/pallet/crate/meteor.clj"
+ :versions [{:pallet "0.8.0-RC.3" :version "0.8.0-SNAPSHOT"}]}
