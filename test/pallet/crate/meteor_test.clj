@@ -8,4 +8,4 @@
 (deftest invoke-test
   (is (build-actions {}
         (meteor/settings {})
-        (meteor/install))))
+        (meteor/install {}))))
