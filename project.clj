@@ -6,6 +6,6 @@
   :dependencies [[org.clojure/clojure "1.4.0"]
                  [com.palletops/pallet "0.8.0-SNAPSHOT"]]
   :resource {:resource-paths ["doc-src"]
-             :target-path "target/classes/pallet_crate/node_js_crate/"
+             :target-path "target/classes/pallet_crate/meteor_crate/"
              :includes [#"doc-src/USAGE.*"]}
   :prep-tasks ["resource" "crate-doc"])
