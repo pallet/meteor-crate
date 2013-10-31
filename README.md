@@ -49,11 +49,11 @@ The `install` function is responsible for actually installing meteor.
 
 ## Live test on vmfest
 
-For example, to run the live test on VMFest, using Ubuntu 12.04:
+For example, to run the live test on VMFest, using Ubuntu 13.04:
 
 ```sh
-lein with-profile +vmfest pallet up --selectors ubuntu-12-04 --phases install,configure,test
-lein with-profile +vmfest pallet down --selectors ubuntu-12-04
+lein with-profile +vmfest pallet up --selectors ubuntu-13
+lein with-profile +vmfest pallet down --selectors ubuntu-13
 ```
 
 ## License
