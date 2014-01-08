@@ -84,7 +84,7 @@
   "Rebuild fibers in a bundle."
   [bundle-path]
   (with-action-options
-    {:script-dir (str (file bundle-path "server" "node_modules"))}
+    {:script-dir (str (file bundle-path "programs" "server" "node_modules"))}
     (exec-checked-script
      "Rebuild fibers"
      (rm fibers :recursive true :force true)
