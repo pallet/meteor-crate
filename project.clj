@@ -1,4 +1,4 @@
-(defproject com.palletops/meteor-crate "0.8.0-alpha.2"
+(defproject com.palletops/meteor-crate "0.8.0-SNAPSHOT"
   :description "Crate for meteor installation"
   :url "http://github.com/pallet/meteor-crate"
   :license {:name "Eclipse Public License"
