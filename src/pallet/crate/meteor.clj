@@ -101,15 +101,16 @@
 
 (defn server-environment
   "Return a map of environment vars to use when running a meteor bundle."
-  [bundle-root {:keys [root-url port mongo-url
-                       mail-url meteor-settings
-                       exec-with instance-id]
-                :or {port 8080
-                     mongo-url "mongodb://localhost:27017/app"
-                     exec-with "node"}}]
+  [{:keys [root-url port mongo-url mongo-oplog-url
+           mail-url meteor-settings
+           exec-with instance-id]
+    :or {port 8080
+         mongo-url "mongodb://localhost:27017/app"
+         exec-with "node"}}]
   (-> {:PORT port
        :MONGO_URL mongo-url
        :ROOT_URL (or root-url (str "http://localhost:" port))}
+      (maybe-assoc :MONGO_OPLOG_URL mongo-oplog-url)
       (maybe-assoc :MAIL_URL mail-url)
       (maybe-assoc :METEOR_SETTINGS meteor-settings)))
 
