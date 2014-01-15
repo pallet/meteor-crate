@@ -1,3 +1,7 @@
+# 0.8.0-alpha.3
+
+- Add mongo-oplog-url to server-environment
+
 # 0.8.0-alpha.2
 
 - fix path to rebuild fibers package
