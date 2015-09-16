@@ -90,6 +90,15 @@
      (rm fibers :recursive true :force true)
      ("npm" "--color" false install "fibers@1.0.1"))))
 
+(defplan npm-install
+  "Install bundle dependencies."
+  [bundle-path]
+  (with-action-options
+    {:script-dir (str (file bundle-path "programs" "server"))}
+    (exec-checked-script
+     "Install bundle dependencies"
+     ("npm" "--color" false install))))
+
 (defplan deploy-bundle
   "Deploy a bundle for meteor.
 
@@ -97,7 +106,7 @@
   the bundle tgz."
   [target-path bundle-file-spec]
   (apply-map remote-directory target-path bundle-file-spec)
-  (rebuild-fibers target-path))
+  (npm-install target-path))
 
 (defn server-environment
   "Return a map of environment vars to use when running a meteor bundle."
